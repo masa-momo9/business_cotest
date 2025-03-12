@@ -217,11 +217,14 @@
             background-color: white;
             border-radius: var(--standard-radius);
             box-shadow: var(--standard-shadow);
-            padding: 1rem;
-            min-width: 80px;
+            padding: 1.5rem 2rem;
+            min-width: 140px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .countdown-item::after {
@@ -230,20 +233,23 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 4px;
             background-color: var(--primary-color);
         }
 
         .countdown-number {
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: 700;
             color: var(--primary-color);
+            line-height: 1;
         }
 
         .countdown-label {
-            font-size: 0.9rem;
+            font-size: 1.5rem;
             color: var(--dark-color);
-            margin-top: 0.5rem;
+            margin-left: 0.5rem;
+            align-self: flex-end;
+            padding-bottom: 0.3rem;
         }
 
         /* コンテスト概要セクション */
@@ -745,21 +751,13 @@
         <section id="hero" class="hero">
             <div class="hero-content">
                 <h1 class="hero-title">第20回桃山学院大学<br>ビジネスプランコンテスト</h1>
-                <p class="hero-subtitle">あなたのアイデアが未来を変える</p>
+                <p class="hero-subtitle">開催まであと</p>
                 
                 <!-- カウントダウンタイマー -->
                 <div class="countdown">
                     <div class="countdown-item hover-lift">
                         <div class="countdown-number" id="days">328</div>
                         <div class="countdown-label">日</div>
-                    </div>
-                    <div class="countdown-item hover-lift">
-                        <div class="countdown-number" id="hours">12</div>
-                        <div class="countdown-label">時間</div>
-                    </div>
-                    <div class="countdown-item hover-lift">
-                        <div class="countdown-number" id="minutes">30</div>
-                        <div class="countdown-label">分</div>
                     </div>
                 </div>
                 
@@ -932,6 +930,7 @@
             width: 100%;
             border: none;
             transition: height 0.3s ease;
+            min-height: 2000px; /* 最小の高さを大きく設定 */
         }
     </style>
 
@@ -1004,8 +1003,8 @@
 
             // iframeの高さを自動調整する関数
             function resizeIframe(iframe) {
-                // 初期高さを1500pxに設定
-                iframe.style.height = '1500px';
+                // 初期高さを2000pxに設定 (以前より高く)
+                iframe.style.height = '2000px';
                 
                 // メッセージイベントでフォームとの通信を処理
                 window.addEventListener('message', function(e) {
@@ -1014,8 +1013,8 @@
                             const data = JSON.parse(e.data);
                             if (data.scrollHeight) {
                                 // スクロールが不要になるよう、実際の高さより余裕を持って設定
-                                const newHeight = data.scrollHeight + 100; // 余裕を持たせる
-                                iframe.style.height = newHeight + 'px';
+                                const newHeight = data.scrollHeight + 200; // より余裕を持たせる
+                                iframe.style.height = Math.max(newHeight, 2000) + 'px';
                             }
                         } catch (error) {
                             console.log('JSONパースエラー', error);
