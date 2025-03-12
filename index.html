@@ -737,6 +737,7 @@
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#venue">会場案内</a></li>
                 <li><a href="#contact">お問い合わせ</a></li>
+                <li><a href="#admin">管理者</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -908,6 +909,29 @@
         </section>
     </main>
 
+    <!-- 管理者用セクション -->
+    <section id="admin" class="contact">
+        <h2 class="section-heading">管理者用ページ</h2>
+        <div class="contact-info" id="admin-login">
+            <h3 style="margin-bottom: 1rem; color: var(--primary-color);">パスワードを入力してください</h3>
+            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                <input type="password" id="admin-password" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; margin-right: 0.5rem;">
+                <button onclick="checkAdminPassword()" class="primary-button" style="margin: 0; padding: 0.5rem 1rem;">送信</button>
+            </div>
+        </div>
+        <div id="admin-content" style="display:none; max-width: 700px; margin: 0 auto; background-color: white; padding: 2rem; border-radius: 10px; box-shadow: var(--standard-shadow);">
+            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">管理者コンテンツ</h3>
+            <p>ここに管理者向けの情報やコントロールを配置します。</p>
+            <div style="margin-top: 1rem;">
+                <h4 style="margin-bottom: 0.5rem;">エントリー状況</h4>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="padding: 0.5rem; border-bottom: 1px solid #eee;">アイデア部門: 12件</li>
+                    <li style="padding: 0.5rem; border-bottom: 1px solid #eee;">起業部門: 8件</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- フッター -->
     <footer>
         <div class="footer-content">
@@ -1038,6 +1062,17 @@
             
             // グローバルスコープにresizeIframe関数を追加
             window.resizeIframe = resizeIframe;
+            
+            // 管理者パスワード確認機能
+            window.checkAdminPassword = function() {
+                var password = document.getElementById("admin-password").value;
+                if (password === "mypassword123") { // ここでパスワードを設定
+                    document.getElementById("admin-content").style.display = "block";
+                    document.getElementById("admin-login").style.display = "none";
+                } else {
+                    alert("パスワードが違います！");
+                }
+            };
         });
     </script>
 </body>
