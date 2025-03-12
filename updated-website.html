@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第20回桃山学院大学ビジネスプランコンテスト</title>
+    <style>
+        /* 基本変数の定義 */
+        :root {
+            --primary-color: #7c001a;
+            --secondary-color: #a61c37;
+            --light-color: #f8f9fa;
+            --accent-color: #ffca28;
+            --dark-color: #343a40;
+            --gray-color: #e9ecef;
+            
+            /* 共通の効果 */
+            --standard-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            --primary-shadow: 0 4px 15px rgba(124, 0, 26, 0.3);
+            --primary-hover-shadow: 0 6px 20px rgba(124, 0, 26, 0.4);
+            --standard-radius: 8px;
+            --standard-transition: all 0.3s ease;
+        }
+
+        /* ユーティリティクラス */
+        .shadow {
+            box-shadow: var(--standard-shadow);
+        }
+
+        .transition {
+            transition: var(--standard-transition);
+        }
+
+        .hover-lift {
+            transition: var(--standard-transition);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .primary-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: var(--primary-shadow);
+            transition: var(--standard-transition);
+        }
+
+        .primary-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--primary-hover-shadow);
+        }
+
+        .section-heading {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        /* リセットとベース */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        /* ヘッダーとナビゲーション */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: var(--standard-shadow);
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--standard-transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--dark-color);
+            transition: var(--standard-transition);
+        }
+
+        /* メインセクション */
+        main {
+            margin-top: 70px;
+        }
+
+        section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8e8e8 100%);
+            padding: 6rem 5% 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%237c001a" fill-opacity="0.05" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,138.7C672,139,768,181,864,181.3C960,181,1056,139,1152,117.3C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+        }
+
+        /* カウントダウンタイマー */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-item {
+            background-color: white;
+            border-radius: var(--standard-radius);
+            box-shadow: var(--standard-shadow);
+            padding: 1rem;
+            min-width: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+            margin-top: 0.5rem;
+        }
+
+        /* コンテスト概要セクション */
+        .overview {
+            background-color: white;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .info-boxes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background-color: var(--light-color);
+            border-radius: var(--standard-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--standard-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .info-box h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .info-box h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .info-box p {
+            font-size: 1rem;
+            color: var(--dark-color);
+        }
+
+        .division-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .division-box {
+            background-color: white;
+            border-radius: var(--standard-radius);
+            padding: 2rem;
+            border-left: 8px solid var(--primary-color);
+            border-top: 3px solid var(--primary-color);
+            box-shadow: var(--primary-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .division-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .division-box h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed rgba(124, 0, 26, 0.3);
+        }
+
+        .division-box p {
+            font-size: 1rem;
+            color: var(--dark-color);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* タイムラインセクション */
+        .timeline {
+            background-color: var(--light-color);
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2.5px;
+            border-radius: 5px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 10px 40px;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            position: relative;
+            padding: 20px;
+            background-color: white;
+            border-radius: var(--standard-radius);
+            box-shadow: var(--standard-shadow);
+        }
+
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            right: -50px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -50px;
+        }
+
+        .timeline-date {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+
+        /* エントリーフォームセクション */
+        .entry {
+            background-color: white;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            text-align: center;
+        }
+
+        .entry-description {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--standard-shadow);
+        }
+
+        /* よくある質問セクション */
+        .faq {
+            background-color: var(--light-color);
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            margin-bottom: 1rem;
+            border-radius: var(--standard-radius);
+            overflow: hidden;
+            box-shadow: var(--standard-shadow);
+        }
+
+        .accordion-header {
+            background-color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            transition: var(--standard-transition);
+        }
+
+        .accordion-header:hover {
+            background-color: var(--gray-color);
+        }
+
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .accordion-header.active::after {
+            content: '-';
+        }
+
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            background-color: white;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-content-inner {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            color: var(--dark-color);
+            line-height: 1.7;
+        }
+
+        /* 会場案内セクション */
+        .venue {
+            background-color: white;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .venue-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .venue-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .venue-name {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .venue-address {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .map-container {
+            flex: 2;
+            min-width: 300px;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--standard-shadow);
+        }
+
+        /* お問い合わせセクション */
+        .contact {
+            background-color: var(--light-color);
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--standard-shadow);
+        }
+
+        .contact-label {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .contact-email {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            word-break: break-all;
+        }
+
+        .contact-email a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--standard-transition);
+        }
+
+        .contact-email a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* フッターセクション */
+        footer {
+            background-color: #2A004A;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* レスポンシブデザイン */
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: white;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 0.8rem;
+            }
+
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+
+            .countdown-label {
+                font-size: 0.7rem;
+            }
+
+            .division-boxes, .info-boxes {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-container::after {
+                left: 40px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 20px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                left: -40px;
+                margin-top: 0;
+            }
+
+            .form-container, .map-container {
+                width: 100%;
+            }
+            
+            iframe {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">桃山学院大学</a>
+            <ul class="nav-links">
+                <li><a href="#hero">ホーム</a></li>
+                <li><a href="#overview">コンテスト概要</a></li>
+                <li><a href="#timeline">タイムライン</a></li>
+                <li><a href="#entry">エントリー</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#venue">会場案内</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ヒーローセクション -->
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">第20回桃山学院大学<br>ビジネスプランコンテスト</h1>
+                <p class="hero-subtitle">あなたのアイデアが未来を変える</p>
+                
+                <!-- カウントダウンタイマー -->
+                <div class="countdown">
+                    <div class="countdown-item hover-lift">
+                        <div class="countdown-number" id="days">328</div>
+                        <div class="countdown-label">日</div>
+                    </div>
+                    <div class="countdown-item hover-lift">
+                        <div class="countdown-number" id="hours">12</div>
+                        <div class="countdown-label">時間</div>
+                    </div>
+                    <div class="countdown-item hover-lift">
+                        <div class="countdown-number" id="minutes">30</div>
+                        <div class="countdown-label">分</div>
+                    </div>
+                </div>
+                
+                <a href="#entry" class="primary-button">エントリーする</a>
+            </div>
+        </section>
+
+        <!-- コンテスト概要セクション -->
+        <section id="overview" class="overview">
+            <h2 class="section-heading">コンテスト概要</h2>
+            <div class="info-boxes">
+                <div class="info-box hover-lift">
+                    <h3>主催</h3>
+                    <p>桃山学院大学</p>
+                </div>
+                <div class="info-box hover-lift">
+                    <h3>開催日時</h3>
+                    <p>2026年2月13日（金）<br>13:00～17:00</p>
+                </div>
+                <div class="info-box hover-lift">
+                    <h3>会場</h3>
+                    <p>QUINTBRIDGE<br>（NTT西日本オープンイノベーション施設）</p>
+                </div>
+                <div class="info-box hover-lift">
+                    <h3>応募資格</h3>
+                    <p>桃山学院大学の在校生<br>全国の高等学校生・高等専門学校生</p>
+                </div>
+            </div>
+            
+            <div class="division-boxes">
+                <div class="division-box hover-lift">
+                    <h3>アイデア部門</h3>
+                    <p>新たなアイデアや斬新なビジネスモデルを広く発表。起業前段階のコンセプトやプロトタイプの段階でも応募可能です。</p>
+                </div>
+                <div class="division-box hover-lift">
+                    <h3>起業部門</h3>
+                    <p>起業を目指すチームによる事業計画の発表。プレゼンテーションに加え、実現可能性、事業性を審査します。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- タイムラインセクション -->
+        <section id="timeline" class="timeline">
+            <h2 class="section-heading">タイムライン</h2>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025年9月25日(木)～11月7日(金)</div>
+                        <h3 class="timeline-title">エントリー受付</h3>
+                        <p class="timeline-description">11月7日17:00締切</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025年11月24日(月)</div>
+                        <h3 class="timeline-title">一次審査結果発表</h3>
+                        <p class="timeline-description">メールにて結果をお知らせします</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025年12月1日(火)～2026年2月5日(金)</div>
+                        <h3 class="timeline-title">ブラッシュアップ期間</h3>
+                        <p class="timeline-description">起業部門出場チームのみ対象</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2026年2月13日(金)</div>
+                        <h3 class="timeline-title">本選</h3>
+                        <p class="timeline-description">13:00～17:00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- エントリーフォームセクション -->
+        <section id="entry" class="entry">
+            <h2 class="section-heading">エントリー</h2>
+            <p class="entry-description">以下のフォームからエントリーしてください。応募締切は2025年11月7日(金)17:00です。</p>
+            <div class="form-container">
+                <iframe id="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSdGyfd3lupbozK40eA7kn5UPvREyGM467uH2bE_vyHlp7FoXQ/viewform?embedded=true" width="640" frameborder="0" marginheight="0" marginwidth="0" onload="resizeIframe(this)">読み込んでいます…</iframe>
+            </div>
+        </section>
+
+        <!-- よくある質問セクション -->
+        <section id="faq" class="faq">
+            <h2 class="section-heading">よくある質問</h2>
+            <div class="accordion" id="faq-accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">チームでの参加は可能ですか？</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            はい、個人参加とチーム参加のどちらも可能です。チームの場合は代表者が応募フォームに記入してください。
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">どのような審査基準ですか？</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            アイデア部門では独創性、市場性、社会的意義などを評価します。起業部門ではさらに競合比較、実現可能性なども評価対象となります。
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">プレゼンテーションの時間はどれくらいですか？</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            プレゼンテーションは7分間、質疑応答は5分間を予定しています。時間配分は変更になる可能性がありますので、最終的な詳細は参加者に別途お知らせします。
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">発表資料はどのような形式で準備すればよいですか？</div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            PowerPointでの提出をお願いしています。スライド枚数は30枚までです。発表時間内に終えられるようにしてください。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 会場案内セクション -->
+        <section id="venue" class="venue">
+            <h2 class="section-heading">会場案内</h2>
+            <div class="venue-details">
+                <div class="venue-info">
+                    <h3 class="venue-name">QUINTBRIDGE（NTT西日本オープンイノベーション施設）</h3>
+                    <p class="venue-address">〒534-0024<br>大阪府大阪市都島区東野田町４丁目１５−８２</p>
+                    <p>JR大阪環状線「京橋駅」北口改札より徒歩10分<br>京阪本線「京橋駅」西口改札より徒歩10分<br>地下鉄・長堀鶴見緑地線「京橋駅」3番出口より徒歩5分</p>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3280.216932299939!2d135.530017!3d34.699708!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e1b832535a41%3A0xbd9433b7febeb0f2!2sQUINTBRIDGE!5e0!3m2!1sja!2sjp!4v1741316033539!5m2!1sja!2sjp" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- お問い合わせセクション -->
+        <section id="contact" class="contact">
+            <h2 class="section-heading">お問い合わせ</h2>
+            <div class="contact-info">
+                <p class="contact-label"><strong>下記よりお問い合わせください</strong></p>
+                <p class="contact-email"><a href="mailto:biz-contest@andrew.ac.jp">biz-contest@andrew.ac.jp</a></p>
+                <p>運営：桃山学院大学 卒業研究発表会委員会・起業部</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-info">桃山学院大学 卒業研究発表会委員会・起業部</p>
+            <p class="copyright">© 2025 桃山学院大学 ビジネスプランコンテスト. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <style>
+        /* iframeの基本スタイル */
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--standard-shadow);
+        }
+        
+        .form-container iframe {
+            width: 100%;
+            border: none;
+            transition: height 0.3s ease;
+        }
+    </style>
+
+    <script>
+        // DOMContentLoadedイベントで実行する関数
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ハンバーガーメニューの動作
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // ナビゲーションリンクをクリックしたらメニューを閉じる
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // カウントダウンタイマーの設定
+            const countDownDate = new Date("Feb 13, 2026 13:00:00").getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+                
+                if (distance < 0) {
+                    document.getElementById("days").innerHTML = "0";
+                    document.getElementById("hours").innerHTML = "0";
+                    document.getElementById("minutes").innerHTML = "0";
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById("days").innerHTML = days;
+                document.getElementById("hours").innerHTML = hours;
+                document.getElementById("minutes").innerHTML = minutes;
+            }
+            
+            // 初回実行
+            updateCountdown();
+            
+            // 1分ごとに更新
+            setInterval(updateCountdown, 60000);
+
+            // アコーディオンの動作
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    
+                    if (this.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.maxHeight = 0;
+                    }
+                });
+            });
+
+            // iframeの高さを自動調整する関数
+            function resizeIframe(iframe) {
+                // 初期高さを1500pxに設定
+                iframe.style.height = '1500px';
+                
+                // メッセージイベントでフォームとの通信を処理
+                window.addEventListener('message', function(e) {
+                    if (e.origin.indexOf('google.com') > -1) {
+                        try {
+                            const data = JSON.parse(e.data);
+                            if (data.scrollHeight) {
+                                // スクロールが不要になるよう、実際の高さより余裕を持って設定
+                                const newHeight = data.scrollHeight + 100; // 余裕を持たせる
+                                iframe.style.height = newHeight + 'px';
+                            }
+                        } catch (error) {
+                            console.log('JSONパースエラー', error);
+                        }
+                    }
+                });
+            }
+            
+            // グローバルスコープにresizeIframe関数を追加
+            window.resizeIframe = resizeIframe;
+        });
+    </script>
+</body>
+</html>
