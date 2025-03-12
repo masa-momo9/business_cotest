@@ -926,11 +926,19 @@
             box-shadow: var(--standard-shadow);
         }
         
+        /* スマホ向け設定 - 最小の高さを大きく設定 */
         .form-container iframe {
             width: 100%;
             border: none;
             transition: height 0.3s ease;
-            min-height: 2000px; /* 最小の高さを大きく設定 */
+            min-height: 2000px;
+        }
+        
+        /* パソコン向け設定 - 高さを1500pxに調整 */
+        @media screen and (min-width: 768px) {
+            .form-container iframe {
+                min-height: 1500px;
+            }
         }
     </style>
 
@@ -1003,8 +1011,10 @@
 
             // iframeの高さを自動調整する関数
             function resizeIframe(iframe) {
-                // 初期高さを2000pxに設定 (以前より高く)
-                iframe.style.height = '2000px';
+                // デバイスに応じた初期高さを設定
+                const isMobile = window.innerWidth < 768;
+                const initialHeight = isMobile ? 2000 : 1500;
+                iframe.style.height = initialHeight + 'px';
                 
                 // メッセージイベントでフォームとの通信を処理
                 window.addEventListener('message', function(e) {
@@ -1013,8 +1023,11 @@
                             const data = JSON.parse(e.data);
                             if (data.scrollHeight) {
                                 // スクロールが不要になるよう、実際の高さより余裕を持って設定
-                                const newHeight = data.scrollHeight + 200; // より余裕を持たせる
-                                iframe.style.height = Math.max(newHeight, 2000) + 'px';
+                                const padding = isMobile ? 200 : 100; // モバイルではより大きな余裕を持たせる
+                                const newHeight = data.scrollHeight + padding;
+                                
+                                // デバイスに応じた最小高さを適用
+                                iframe.style.height = Math.max(newHeight, initialHeight) + 'px';
                             }
                         } catch (error) {
                             console.log('JSONパースエラー', error);
